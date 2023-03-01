@@ -9,6 +9,7 @@ type WebHookRequest = FastifyRequest<{
 }>
 
 server.post('/webhook', async (request: WebHookRequest, reply) => {
+  console.log(request.body)
   const { validationToken } = request.query
   const response = reply.code(200).header("Content-Type", "text/plain; charset=utf-8")
   if(!validationToken) {
