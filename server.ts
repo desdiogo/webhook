@@ -21,7 +21,7 @@ server.post('/webhook', async (request: WebHookRequest, reply) => {
   response.send(validationToken)
 })
 
-server.listen({ port: process.env.PORT }, (err, address) => {
+server.listen({ port: process.env.PORT, host: "0.0.0.0" }, (err, address) => {
   if (err) {
     console.error(err)
     process.exit(1)
