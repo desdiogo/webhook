@@ -257,6 +257,11 @@
   dependencies:
     "path-type" "^4.0.0"
 
+"dotenv@^16.0.3":
+  "integrity" "sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ=="
+  "resolved" "https://registry.npmjs.org/dotenv/-/dotenv-16.0.3.tgz"
+  "version" "16.0.3"
+
 "esbuild@^0.17.6", "esbuild@>=0.17", "esbuild@~0.17.6":
   "integrity" "sha512-n7V3v29IuZy5qgxx25TKJrEm0FHghAlS6QweUcyIgh/U0zYmQcvogWROitrTyZId1mHSkuhhuyEXtI9OXioq7A=="
   "resolved" "https://registry.npmjs.org/esbuild/-/esbuild-0.17.10.tgz"

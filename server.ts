@@ -1,4 +1,6 @@
 import fastify from 'fastify'
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 const server = fastify()
 
@@ -7,7 +9,7 @@ server.get('/webhook', async (request, reply) => {
   reply.code(200).header("Content-Type", "text/plain; charset=utf-8")
 })
 
-server.listen({ port: 8080 }, (err, address) => {
+server.listen({ port: process.env.PORT }, (err, address) => {
   if (err) {
     console.error(err)
     process.exit(1)
