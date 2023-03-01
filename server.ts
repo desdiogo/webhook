@@ -4,7 +4,7 @@ dotenv.config()
 
 const server = fastify()
 
-server.get('/webhook', async (request, reply) => {
+server.post('/webhook', async (request, reply) => {
   console.log(request.body)
   reply.code(200).header("Content-Type", "text/plain; charset=utf-8")
 })
