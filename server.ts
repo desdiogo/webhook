@@ -1,10 +1,9 @@
 import fastify, {FastifyRequest} from 'fastify'
-import { PrismaClient } from '@prisma/client'
-import * as dotenv from 'dotenv'
-dotenv.config()
+import { HOST, PORT } from './env'
+import { prismaPlugin } from './plugins/prisma'
 
-const prisma = new PrismaClient()
 const server = fastify()
+server.register(prismaPlugin)
 
 type WebHookRequest = FastifyRequest<{
   Querystring: { validationToken?: string }
@@ -13,11 +12,16 @@ type WebHookRequest = FastifyRequest<{
 server.post('/webhook', async (request: WebHookRequest, reply) => {
   const body = request.body
   if(body) {
-    await prisma.data.create({
-      data: {
-        data: body
-      }
-    })
+    try {
+      await server.prisma.webhook.create({
+        data: {
+          data: body
+        }
+      })
+    } catch(error) {
+      console.log('error save data', error)
+    }
+
   }
   const { validationToken } = request.query
   const response = reply.code(200).header("Content-Type", "text/plain; charset=utf-8")
@@ -31,7 +35,7 @@ server.post('/webhook', async (request: WebHookRequest, reply) => {
   response.send(validationToken)
 })
 
-server.listen({ port: process.env.PORT, host: "0.0.0.0" }, (err, address) => {
+server.listen({ port: PORT, host:  HOST || "0.0.0.0" }, (err, address) => {
   if (err) {
     console.error(err)
     process.exit(1)
